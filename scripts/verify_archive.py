@@ -383,6 +383,19 @@ def check_article(entry: dict, errors: list[str]) -> None:
     source = meta.get("source", "")
     if isinstance(source, str) and not source.startswith("https://"):
         fail(errors, f"{slug} 的来源需要是 https 地址")
+    if meta.get("status") == "published":
+        for field in ("wechat_url", "wechat_account", "wechat_published_date"):
+            value = meta.get(field)
+            if not isinstance(value, str) or not value.strip():
+                fail(errors, f"{slug} 已发布但缺少 {field}")
+            elif value != entry.get(field):
+                fail(errors, f"{slug} 的 {field} 与索引不一致")
+        wechat_url = str(meta.get("wechat_url", ""))
+        if wechat_url and not wechat_url.startswith("https://"):
+            fail(errors, f"{slug} 的 wechat_url 需要是 https 地址")
+        published_on = str(meta.get("wechat_published_date", ""))
+        if published_on and not DATE_RE.fullmatch(published_on):
+            fail(errors, f"{slug} 的 wechat_published_date 不是 YYYY-MM-DD")
 
     files = meta.get("files") or {}
     markdown = directory / files.get("markdown", "")

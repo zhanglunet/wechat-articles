@@ -6,7 +6,11 @@ version: "1.0"
 version_date: "YYYY-MM-DD"
 first_published: "YYYY-MM-DD"
 status: drafting
-status_note: 用一句话说明这篇现在处于撰写、草稿箱或已发布的哪一步。不要写草稿标识、素材标识或公众号标识。
+status_note: 用一句话说明这篇现在处于撰写、草稿箱或已发布的哪一步。不要写草稿标识、素材标识或公众号原始 ID。
+# 发布后改为 published，并填下面三项。未发布时留空。
+wechat_url: ""
+wechat_account: ""
+wechat_published_date: ""
 editor_source: markdown
 copyright: 版权归作者所有。本篇未授予开放许可。
 structure:

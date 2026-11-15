@@ -16,13 +16,14 @@
 | 来源 | https://trend.zhanglu.net/workflow |
 | 版本 | v2.0，定稿日 2026-11-15 |
 | 首发日期 | 2026-10-18 |
-| 状态 | 草稿已创建，未发布，未群发 |
+| 状态 | 已于 2026-11-15 发布 |
+| 公众号 | [张路的黑板报](https://mp.weixin.qq.com/s/4YjZi3IuGzocFJN16M_c3Q) |
 | 正文 | [article.md](articles/2026/2026-11-15-github-trend-workflow/article.md) |
 | 微信兼容 HTML | [article.html](articles/2026/2026-11-15-github-trend-workflow/article.html) |
 | 选用封面 | [cover-magazine-16x9.jpg](articles/2026/2026-11-15-github-trend-workflow/assets/cover-magazine-16x9.jpg)（杂志风，1280×720） |
 | 元数据 | [metadata.yaml](articles/2026/2026-11-15-github-trend-workflow/metadata.yaml) |
 
-正文有八章、五个案例、三张表。上图是这篇实际选用的杂志风封面。备选两张没有用于这篇草稿：[cover-option-dark-isometric-16x9.jpg](articles/2026/2026-11-15-github-trend-workflow/assets/covers-optional/cover-option-dark-isometric-16x9.jpg)（暗色等轴测）和 [cover-option-minimal-line-16x9.jpg](articles/2026/2026-11-15-github-trend-workflow/assets/covers-optional/cover-option-minimal-line-16x9.jpg)（极简线条），都在 `assets/covers-optional/`。
+正文有八章、五个案例、三张表。上图是这篇实际选用的杂志风封面。备选两张没有用作这篇的封面：[cover-option-dark-isometric-16x9.jpg](articles/2026/2026-11-15-github-trend-workflow/assets/covers-optional/cover-option-dark-isometric-16x9.jpg)（暗色等轴测）和 [cover-option-minimal-line-16x9.jpg](articles/2026/2026-11-15-github-trend-workflow/assets/covers-optional/cover-option-minimal-line-16x9.jpg)（极简线条），都在 `assets/covers-optional/`。
 
 机器可读索引：[articles/index.yaml](articles/index.yaml)。
 
@@ -69,7 +70,7 @@ NOTICE.md     文章版权和上游 md2wechat 许可归属
 
 1. 建目录 `articles/<四位年份>/<YYYY-MM-DD>-<英文短横线 slug>/`。日期用这一版定稿日。
 2. 复制 [templates/article.md](templates/article.md) 和 [templates/metadata.yaml](templates/metadata.yaml) 进去，放上选用封面；备选封面单独放在 `assets/covers-optional/`。
-3. 在 [articles/index.yaml](articles/index.yaml) 写上标题、作者、来源、定稿日和状态。状态用 `drafting`、`draft_created_unpublished`、`published` 或 `withdrawn`。
+3. 在 [articles/index.yaml](articles/index.yaml) 写上标题、作者、来源、定稿日和状态。状态用 `drafting`、`draft_created_unpublished`、`published` 或 `withdrawn`。发布后把 `status` 改为 `published`，并在索引和元数据里写上 `wechat_url`、`wechat_account`（公众号显示名）和 `wechat_published_date`。
 4. 运行检查：
 
 ```bash
