@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 320" width="100%" height="auto">
+  <defs>
+    <filter id="card-shadow" x="-4%" y="-4%" width="108%" height="110%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.04"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#b14b3a"/>
+    </marker>
+  </defs>
+
+  <rect width="860" height="320" rx="12" fill="#fafaf7" stroke="#d9d6cd" stroke-width="1"/>
+
+  <!-- Step 1: 趋势巡航 -->
+  <g transform="translate(20, 30)">
+    <rect width="145" height="240" rx="8" fill="#ffffff" stroke="#d9d6cd" stroke-width="1.5" filter="url(#card-shadow)"/>
+    <rect x="0" y="0" width="145" height="32" rx="8" fill="#f3f1ea"/>
+    <rect x="0" y="24" width="145" height="8" fill="#f3f1ea"/>
+    <text x="12" y="21" font-family="-apple-system, sans-serif" font-size="12" font-weight="700" fill="#1a1a1a">01 · 每日趋势</text>
+    <circle cx="130" cy="16" r="4" fill="#b14b3a"/>
+
+    <text x="12" y="55" font-family="-apple-system, sans-serif" font-size="13" font-weight="600" fill="#1a1a1a">08:15 自动抓取</text>
+    <text x="12" y="75" font-family="-apple-system, sans-serif" font-size="11" fill="#6b6b6b">github.com/trending</text>
+    
+    <path d="M 12 90 H 133" stroke="#f3f1ea" stroke-width="1"/>
+    
+    <text x="12" y="112" font-family="-apple-system, sans-serif" font-size="11" font-weight="600" fill="#1a1a1a">五维评估与过滤：</text>
+    <text x="12" y="132" font-family="-apple-system, sans-serif" font-size="11" fill="#6b6b6b">• 功能痛点与增速</text>
+    <text x="12" y="150" font-family="-apple-system, sans-serif" font-size="11" fill="#6b6b6b">• 交互与工程形态</text>
+    <text x="12" y="168" font-family="-apple-system, sans-serif" font-size="11" fill="#6b6b6b">• License API 实测</text>
+    <text x="12" y="186" font-family="-apple-system, sans-serif" font-size="11" fill="#6b6b6b">• 反信号主动剔除</text>
+    <text x="12" y="204" font-family="-apple-system, sans-serif" font-size="11" fill="#6b6b6b">• 查验 ADOPTED.md</text>
+    
+    <rect x="10" y="218" width="125" height="18" rx="4" fill="#f3f1ea"/>
+    <text x="72.5" y="231" text-anchor="middle" font-family="ui-monospace, monospace" font-size="9.5" fill="#1a1a1a">开源协议与红线审查</text>
+  </g>
+
+  <!-- Arrow 1 -> 2 -->
+  <line x1="168" y1="150" x2="185" y2="150" stroke="#b14b3a" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 2: 匹配与脱敏 -->
+  <g transform="translate(188, 30)">
+    <rect width="145" height="240" rx="8" fill="#ffffff" stroke="#d9d6cd" stroke-width="1.5" filter="url(#card-shadow)"/>
+    <rect x="0" y="0" width="145" height="32" rx="8" fill="#f3f1ea"/>
+    <rect x="0" y="24" width="145" height="8" fill="#f3f1ea"/>
+    <text x="12" y="21" font-family="-apple-system, sans-serif" font-size="12" font-weight="700" fill="#1a1a1a">02 · 对齐仓库</text>
+    <circle cx="130" cy="16" r="4" fill="#b14b3a"/>
+
+    <text x="12" y="55" font-family="-apple-system, sans-serif" font-size="13" font-weight="600" fill="#1a1a1a">对照 24 个仓库</text>
+    <text x="12" y="75" font-family="-apple-system, sans-serif" font-size="11" fill="#6b6b6b">23 演进 + 1 追踪仓</text>
+
+    <path d="M 12 90 H 133" stroke="#f3f1ea" stroke-width="1"/>
+
+    <text x="12" y="112" font-family="-apple-system, sans-serif" font-size="11" font-weight="600" fill="#1a1a1a">去重与脱敏过滤：</text>
+    <text x="12" y="132" font-family="-apple-system, sans-serif" font-size="11" fill="#6b6b6b">• repos.yaml 权威清单</text>
+    <text x="12" y="150" font-family="-apple-system, sans-serif" font-size="11" fill="#6b6b6b">• 已采纳方向零重复</text>
+    <text x="12" y="172" font-family="-apple-system, sans-serif" font-size="11" font-weight="600" fill="#b14b3a">🛡️ Default-Deny</text>
+    <text x="12" y="190" font-family="-apple-system, sans-serif" font-size="11" fill="#6b6b6b">• 私有仓库物理剔除</text>
+    <text x="12" y="208" font-family="-apple-system, sans-serif" font-size="11" fill="#6b6b6b">• 仅公开建议上线</text>
+
+    <rect x="10" y="218" width="125" height="18" rx="4" fill="#f3f1ea"/>
+    <text x="72.5" y="231" text-anchor="middle" font-family="ui-monospace, monospace" font-size="9.5" fill="#b14b3a">保护商业资产安全</text>
+  </g>
+
+  <!-- Arrow 2 -> 3 -->
+  <line x1="336" y1="150" x2="353" y2="150" stroke="#b14b3a" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 3: 人工拍板 -->
+  <g transform="translate(356, 30)">
+    <rect width="145" height="240" rx="8" fill="#fef8f7" stroke="#b14b3a" stroke-width="1.5" filter="url(#card-shadow)"/>
+    <rect x="0" y="0" width="145" height="32" rx="8" fill="#fbeae6"/>
+    <rect x="0" y="24" width="145" height="8" fill="#fbeae6"/>
+    <text x="12" y="21" font-family="-apple-system, sans-serif" font-size="12" font-weight="700" fill="#b14b3a">03 · 人类拍板</text>
+    <circle cx="130" cy="16" r="4" fill="#b14b3a"/>
+
+    <text x="12" y="55" font-family="-apple-system, sans-serif" font-size="13" font-weight="600" fill="#1a1a1a">Human-in-Loop</text>
+    <text x="12" y="75" font-family="-apple-system, sans-serif" font-size="11" fill="#6b6b6b">决策权永远在人</text>
+
+    <path d="M 12 90 H 133" stroke="#f2d5cf" stroke-width="1"/>
+
+    <text x="12" y="112" font-family="-apple-system, sans-serif" font-size="11" font-weight="600" fill="#1a1a1a">指令授权开工：</text>
+    <rect x="12" y="125" width="121" height="26" rx="4" fill="#ffffff" stroke="#b14b3a" stroke-width="1"/>
+    <text x="72.5" y="142" text-anchor="middle" font-family="ui-monospace, monospace" font-size="11" font-weight="700" fill="#b14b3a">"都做" / "采纳 N"</text>
+    
+    <text x="12" y="172" font-family="-apple-system, sans-serif" font-size="11" fill="#6b6b6b">• 机器人只报不开工</text>
+    <text x="12" y="190" font-family="-apple-system, sans-serif" font-size="11" fill="#6b6b6b">• 用户拍板才启动</text>
+    <text x="12" y="208" font-family="-apple-system, sans-serif" font-size="11" fill="#6b6b6b">• 明确记录不做原因</text>
+
+    <rect x="10" y="218" width="125" height="18" rx="4" fill="#fbeae6"/>
+    <text x="72.5" y="231" text-anchor="middle" font-family="ui-monospace, monospace" font-size="9.5" font-weight="600" fill="#b14b3a">严守自动化红线</text>
+  </g>
+
+  <!-- Arrow 3 -> 4 -->
+  <line x1="504" y1="150" x2="521" y2="150" stroke="#b14b3a" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 4: 中央规划 -->
+  <g transform="translate(524, 30)">
+    <rect width="145" height="240" rx="8" fill="#ffffff" stroke="#d9d6cd" stroke-width="1.5" filter="url(#card-shadow)"/>
+    <rect x="0" y="0" width="145" height="32" rx="8" fill="#f3f1ea"/>
+    <rect x="0" y="24" width="145" height="8" fill="#f3f1ea"/>
+    <text x="12" y="21" font-family="-apple-system, sans-serif" font-size="12" font-weight="700" fill="#1a1a1a">04 · 规划拆解</text>
+    <circle cx="130" cy="16" r="4" fill="#b14b3a"/>
+
+    <text x="12" y="55" font-family="-apple-system, sans-serif" font-size="13" font-weight="600" fill="#1a1a1a">中央仓库承载</text>
+    <text x="12" y="75" font-family="-apple-system, sans-serif" font-size="11" fill="#6b6b6b">PRD + T1~T5 骨架</text>
+
+    <path d="M 12 90 H 133" stroke="#f3f1ea" stroke-width="1"/>
+
+    <text x="12" y="112" font-family="-apple-system, sans-serif" font-size="11" font-weight="600" fill="#1a1a1a">同构五层工程标准：</text>
+    <text x="12" y="132" font-family="-apple-system, sans-serif" font-size="11" fill="#6b6b6b">• T1: 纯加法设计草案</text>
+    <text x="12" y="150" font-family="-apple-system, sans-serif" font-size="11" fill="#6b6b6b">• T2: 内核+只追账本</text>
+    <text x="12" y="168" font-family="-apple-system, sans-serif" font-size="11" fill="#6b6b6b">• T3: 一票否决闸门</text>
+    <text x="12" y="186" font-family="-apple-system, sans-serif" font-size="11" fill="#6b6b6b">• T4: 划界零抄袭断言</text>
+    <text x="12" y="204" font-family="-apple-system, sans-serif" font-size="11" fill="#6b6b6b">• T5: 双遍逐字节验收</text>
+
+    <rect x="10" y="218" width="125" height="18" rx="4" fill="#f3f1ea"/>
+    <text x="72.5" y="231" text-anchor="middle" font-family="ui-monospace, monospace" font-size="9.5" fill="#1a1a1a">先定契约，再写代码</text>
+  </g>
+
+  <!-- Arrow 4 -> 5 -->
+  <line x1="672" y1="150" x2="689" y2="150" stroke="#b14b3a" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 5: 目标仓库落地 -->
+  <g transform="translate(692, 30)">
+    <rect width="145" height="240" rx="8" fill="#ffffff" stroke="#d9d6cd" stroke-width="1.5" filter="url(#card-shadow)"/>
+    <rect x="0" y="0" width="145" height="32" rx="8" fill="#f3f1ea"/>
+    <rect x="0" y="24" width="145" height="8" fill="#f3f1ea"/>
+    <text x="12" y="21" font-family="-apple-system, sans-serif" font-size="12" font-weight="700" fill="#1a1a1a">05 · 准入落地</text>
+    <circle cx="130" cy="16" r="4" fill="#b14b3a"/>
+
+    <text x="12" y="55" font-family="-apple-system, sans-serif" font-size="13" font-weight="600" fill="#1a1a1a">四道门槛 + 收 PR</text>
+    <text x="12" y="75" font-family="-apple-system, sans-serif" font-size="11" fill="#6b6b6b">保持生产代码干净</text>
+
+    <path d="M 12 90 H 133" stroke="#f3f1ea" stroke-width="1"/>
+
+    <text x="12" y="112" font-family="-apple-system, sans-serif" font-size="11" font-weight="600" fill="#1a1a1a">准入与闭环：</text>
+    <text x="12" y="132" font-family="-apple-system, sans-serif" font-size="11" font-weight="700" fill="#1a1a1a">只开 PR，绝不合并</text>
+    <text x="12" y="152" font-family="-apple-system, sans-serif" font-size="11" fill="#6b6b6b">• 过 4 道 PR 准入门槛</text>
+    <text x="12" y="170" font-family="-apple-system, sans-serif" font-size="11" fill="#6b6b6b">• 规则先行 CI 复审</text>
+    <text x="12" y="188" font-family="-apple-system, sans-serif" font-size="11" fill="#6b6b6b">• 人类拍板批次清零</text>
+    <text x="12" y="206" font-family="-apple-system, sans-serif" font-size="11" fill="#6b6b6b">• 沉淀入 PLAYBOOK</text>
+
+    <rect x="10" y="218" width="125" height="18" rx="4" fill="#f3f1ea"/>
+    <text x="72.5" y="231" text-anchor="middle" font-family="ui-monospace, monospace" font-size="9.5" fill="#1a1a1a">高质量演进不失控</text>
+  </g>
+</svg>

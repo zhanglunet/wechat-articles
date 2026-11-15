@@ -1,0 +1,11 @@
+articles:
+  - slug: 2026-11-15-github-trend-workflow
+    year: 2026
+    path: 2026/2026-11-15-github-trend-workflow
+    title: 把 GitHub 趋势变成自己仓库的改进
+    author: 张路
+    source: https://trend.zhanglu.net/workflow
+    version: "2.0"
+    version_date: "2026-11-15"
+    first_published: "2026-10-18"
+    status: draft_created_unpublished

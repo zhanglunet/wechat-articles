@@ -1,0 +1,36 @@
+slug: YYYY-MM-DD-short-english-slug
+title: 文章标题
+author: 作者姓名
+source: https://example.com/your-article
+version: "1.0"
+version_date: "YYYY-MM-DD"
+first_published: "YYYY-MM-DD"
+status: drafting
+status_note: 用一句话说明这篇现在处于撰写、草稿箱或已发布的哪一步。不要写草稿标识、素材标识或公众号标识。
+editor_source: markdown
+copyright: 版权归作者所有。本篇未授予开放许可。
+structure:
+  chapters: 1
+  cases: 0
+  tables: 0
+  table_data_rows: []
+files:
+  markdown: article.md
+  html: article.html
+cover:
+  role: selected
+  style: magazine
+  path: assets/cover-selected-16x9.jpg
+  width: 1280
+  height: 720
+optional_covers: []
+infographic:
+  svg: ""
+  png: ""
+  png_width: 0
+  png_height: 0
+  source: ""
+  credit: ""
+integrity:
+  markdown_sha256: ""
+  html_sha256: ""

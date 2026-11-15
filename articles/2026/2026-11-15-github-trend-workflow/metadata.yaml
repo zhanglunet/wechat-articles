@@ -1,0 +1,46 @@
+slug: 2026-11-15-github-trend-workflow
+title: 把 GitHub 趋势变成自己仓库的改进
+author: 张路
+source: https://trend.zhanglu.net/workflow
+version: "2.0"
+version_date: "2026-11-15"
+first_published: "2026-10-18"
+status: draft_created_unpublished
+status_note: 公众号草稿箱里已有一篇未发布草稿，尚未发布，也未群发。此文件不记录草稿标识、素材标识或公众号标识。
+editor_source: markdown
+copyright: 版权归作者张路所有。本篇未授予开放许可。
+structure:
+  chapters: 8
+  cases: 5
+  tables: 3
+  table_data_rows: [5, 7, 16]
+files:
+  markdown: article.md
+  html: article.html
+cover:
+  role: selected
+  style: magazine
+  path: assets/cover-magazine-16x9.jpg
+  width: 1280
+  height: 720
+optional_covers:
+  - role: optional
+    style: dark-isometric
+    path: assets/covers-optional/cover-option-dark-isometric-16x9.jpg
+    width: 1280
+    height: 720
+  - role: optional
+    style: minimal-line
+    path: assets/covers-optional/cover-option-minimal-line-16x9.jpg
+    width: 1280
+    height: 720
+infographic:
+  svg: assets/workflow-infographic.svg
+  png: assets/workflow-infographic.png
+  png_width: 1720
+  png_height: 640
+  source: https://trend.zhanglu.net/brand/workflow-infographic.svg
+  credit: 张路公开原件
+integrity:
+  markdown_sha256: 5e95d707ed08a5bd46c291b68ab9a61aeeb44400d6df0f5f24a70ce071a6f34f
+  html_sha256: 5976dadd83e2560f3b2b8ef4c19fa2d63cfd8672c8e128c4f785665ef96eac05
