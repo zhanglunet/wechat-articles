@@ -68,11 +68,24 @@ SECRET_RES = (
     re.compile(r"\bsk-[A-Za-z0-9]{20,}\b"),
     re.compile("x-access-" + "token", re.I),
     re.compile(
-        r"""(?i)(?:appsecret|api[_-]?key|secret)\s*[:=]\s*["'](?!<)[^"'\s]{8,}"""
-    ),
-    re.compile(
         r"""(?i)["'](?:thumb_media_id|media_id)["']\s*:\s*["'][A-Za-z0-9_-]{8,}["']"""
     ),
+)
+# 键名可带引号。值可以是引号字符串，也可以是 YAML 里不带引号的一串字符。
+# 以 < 开头的是文档占位符，不当作凭证。
+CREDENTIAL_ASSIGNMENT = re.compile(
+    r"""(?i)
+    ["']?(?:appsecret|api[_-]?key|secret)["']?
+    \s*[:=]\s*
+    (?:
+        "(?!<)[^"\s]{8,}"
+        |
+        '(?!<)[^'\s]{8,}'
+        |
+        (?!["'<])\S{8,}
+    )
+    """,
+    re.VERBOSE,
 )
 IPV4_RE = re.compile(r"\b(?:\d{1,3}\.){3}\d{1,3}\b")
 FORBIDDEN_NAMES = {
@@ -310,7 +323,7 @@ def check_secrets(errors: list[str]) -> None:
         if b"\0" in path.read_bytes()[:4096]:
             continue
         text = path.read_text(encoding="utf-8", errors="replace")
-        for pattern in SECRET_RES:
+        for pattern in (*SECRET_RES, CREDENTIAL_ASSIGNMENT):
             match = pattern.search(text)
             if match:
                 fail(errors, f"{rel} 含有疑似凭证或微信素材标识：{match.group(0)[:48]}")
@@ -476,8 +489,35 @@ def check_article(entry: dict, errors: list[str]) -> None:
                 fail(errors, f"{slug} 缺少审核稿标识：{marker}")
 
 
+def check_credential_examples() -> None:
+    """Lock the assignment forms the archive scan must accept or reject."""
+    token = "01234567" + "89abcdef" * 2
+    detected = (
+        "secret: " + token,
+        '"secret": "' + token + '"',
+        "api_key: " + token,
+        'SECRET="' + token + '"',
+    )
+    allowed = (
+        'SECRET="<' + "placeholder>",
+        "secret: <" + "placeholder>",
+        '"api_key": "<' + 'placeholder>"',
+    )
+    for sample in detected:
+        if CREDENTIAL_ASSIGNMENT.search(sample) is None:
+            raise ArchiveError("凭证赋值没有被识别")
+    for sample in allowed:
+        if CREDENTIAL_ASSIGNMENT.search(sample) is not None:
+            raise ArchiveError("尖括号占位符被误判为凭证")
+
+
 def main() -> int:
     errors: list[str] = []
+    try:
+        check_credential_examples()
+    except ArchiveError as exc:
+        print(exc)
+        return 1
     try:
         index = load_yaml(INDEX_PATH)
     except ArchiveError as exc:
