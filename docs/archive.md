@@ -58,6 +58,14 @@ slug 用小写英文和数字，方便路径稳定。中文标题写在 `title` 
 - `published`：作者已在公众号后台发布
 - `withdrawn`：作者撤回，或不再准备发布
 
+`status` 为 `published` 时，索引和该篇 `metadata.yaml` 同时写这三个字段：
+
+| 字段 | 含义 |
+| --- | --- |
+| `wechat_url` | 正式推文的公开链接 |
+| `wechat_account` | 公众号显示名 |
+| `wechat_published_date` | 发布日期，`YYYY-MM-DD`，不写钟点 |
+
 状态只描述进度。不要在元数据、索引或正文文件名里写草稿标识、素材标识、公众号原始 ID。
 
 ## 封面和配图
