@@ -1,0 +1,24 @@
+# 密钥与本机配置。凭证只放环境变量或本机配置，不入库。
+.env
+.env.*
+*.pem
+*.key
+credentials.json
+secrets.json
+config.yaml
+md2wechat.yaml
+.secrets/
+
+# md2wechat 运行产物。草稿载荷和已替换成微信图床地址的正文不入库。
+draft.json
+**/draft.json
+**/*-wechat-body.html
+**/*.prompt.txt
+outputs/
+*.log
+
+# 本地缓存
+.DS_Store
+__pycache__/
+*.pyc
+.venv/
