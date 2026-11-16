@@ -8,4 +8,4 @@ articles:
     version: "2.0"
     version_date: "2026-11-15"
     first_published: "2026-10-18"
-    status: draft_created_unpublished
+    status: published
