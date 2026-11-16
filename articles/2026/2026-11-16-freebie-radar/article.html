@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>自己搭一个免费资源雷达</title>
+</head>
+<body style="font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif; font-size: 17px; line-height: 1.8; color: #333333; max-width: 640px; margin: 0 auto; padding: 16px;">
+<h1 style="font-size: 24px; line-height: 1.4; margin: 8px 0 12px; color: #111111;">自己搭一个免费资源雷达</h1>
+<p style="font-size: 14px; color: #888888; margin: 0 0 16px;">作者：张路 ｜ 2026-11-16 ｜ 来源：https://github.com/zhanglunet/freebie-radar</p>
+<p style="margin: 0 0 16px;"><img src="assets/cover-magazine-16x9.jpg" alt="免费资源雷达封面" style="width: 100%; display: block;"></p>
+<p style="font-size: 14px; color: #888888; margin: 0 0 16px;">图片：本文封面，由 AI 生成。</p>
+<p style="margin: 0 0 16px;">11 月 15 日早上，我在网上刷到一个开源项目：freebie-radar，一个自己搭的免费资源聚合站。第一反应是收藏，第二反应是：别收藏了，直接搭一个试试。</p>
+<h2 style="font-size: 20px; margin: 28px 0 12px; color: #111111;">一、从一个收藏夹开始</h2>
+<p style="margin: 0 0 16px;">我的收藏夹里躺着不少“以后再看”的东西，大部分再也没打开过。这个项目不一样，它解决的是一件每天都会发生的事：网上每天都有免费的东西在出现，也在过期——免费的 Key、代金券、游戏、课程、会员。等你刷到的时候，往往已经领完了。</p>
+<p style="margin: 0 0 16px;">freebie-radar 的作者 ZiChuanLan 把它做成了一个自托管的聚合站：从几十个源头自动抓，筛一遍，再推给你。先在线上体验站看了一眼，界面干净，东西是真的在更新。我当时的想法很简单：收藏一个链接，不如自己跑一个。这样每天打开，就是自己的雷达。</p>
+<h2 style="font-size: 20px; margin: 28px 0 12px; color: #111111;">二、这个雷达是什么</h2>
+<p style="margin: 0 0 16px;">freebie-radar 是一个自托管的免费资源聚合站，MIT 开源，2026 年 11 月 12 日建仓。11 月 15 日早上我看到它时是 327 个 star，到 16 日上午已经 799 个，fork 132 个。</p>
+<p style="margin: 0 0 16px;">它的做法分三层：规则先筛一遍，把明显不是免费资源的东西去掉；再用 AI 做语义定级，分种类、分质量；最后通过 Telegram 多路由推送。技术栈很轻：Node 24 原生 TypeScript，加 node:sqlite 存数据，React 做前端，Docker Compose 一把梭，默认监听 8788 端口，数据落在 ./data/radar.db，内存不到 100MB。</p>
+<p style="margin: 0 0 16px;">内置 63 个源，默认启用 33 个。来源五花八门：NodeSeek、LINUX DO、V2EX、Epic 免费游戏、各类免费资源站。数据进来之后先去重、打分、定级，再决定推不推。</p>
+<h2 style="font-size: 20px; margin: 28px 0 12px; color: #111111;">三、十分钟把它搬上云</h2>
+<p style="margin: 0 0 16px;">我选了手头一台阿里云 ECS 来跑。步骤不复杂：克隆仓库，生成管理用的 ADMIN_TOKEN 写进服务器上的 .env 文件，docker compose up -d。</p>
+<p style="margin: 0 0 16px;"><strong>案例 1：8788 端口被安全组拦住。</strong>容器起来了，健康检查在机器里是通的，但从外面打公网地址加 8788 端口一直超时。查了一圈，主机防火墙是干净的，问题在阿里云安全组：8788 没放行。改走 80 端口，公网访问立刻就通了。教训是：新服务上线，先探针目标端口，别默认云厂商会放行。</p>
+<p style="margin: 0 0 16px;">部署完验证了两件事：健康检查返回 ok，版本号 0.1.0；根页面直接打开是 200。公开访问不需要密钥，只有管理区和写入接口才需要 ADMIN_TOKEN。它只留在服务器的 .env 文件里，不进仓库。</p>
+<h2 style="font-size: 20px; margin: 28px 0 12px; color: #111111;">四、第一个 bug：容器启动就崩</h2>
+<p style="margin: 0 0 16px;">升级到上游 4f89041 的时候，撞上了第一个 bug：容器启动就报错退出，然后反复重启。</p>
+<p style="margin: 0 0 16px;">原因是上游 11 月 15 日的一次重构（2a23c83）把分类口径收敛到 src/shared/taxonomy 这一个单一来源，但 Dockerfile 的运行镜像只 COPY 了 src/server，漏了 src/shared。容器一启动就报 ERR_MODULE_NOT_FOUND，找不到 src/shared/taxonomy.ts。</p>
+<p style="margin: 0 0 16px;"><strong>案例 2：启动即崩的 Dockerfile。</strong>定位不难：容器日志里反复出现同一行报错，顺着模块路径找到 Dockerfile，一眼就看到运行阶段少了一行。修法也只有一行：在运行镜像里补 COPY src/shared ./src/shared。补丁推到了我的 fork 上（commit 7bab1ad），部署随即恢复。</p>
+<p style="margin: 0 0 16px;"><strong>案例 3：被作者关掉的 PR。</strong>我把补丁也提给了上游，PR #2。结果作者关掉了它，没有合并——不是因为补丁不对，而是因为他已经在 main 上用 334dc12 修了同一个地方，改动和我的一致，还多加了一行注释，说明 shared 必须在运行时可见，避免以后重构又被误删。我的 PR 当时处于冲突状态，rebase 也只是把同一行再合一次，没有额外收益。作者在评论里说，定位得很准。</p>
+<p style="margin: 0 0 16px;">这件事的教训是：提 PR 之前，先看一眼上游 main 是不是已经修了。以及，修 bug 的价值不在 PR 合没合，在问题有没有解决。我的 PR 关掉了，但雷达照常在跑。</p>
+<h2 style="font-size: 20px; margin: 28px 0 12px; color: #111111;">五、雷达里现在有什么</h2>
+<p style="margin: 0 0 16px;">截至 11 月 16 日上午实测，雷达里的数据是这样的：</p>
+<table style="width: 100%; border-collapse: collapse; margin: 0 0 16px; font-size: 15px;">
+<tr><th style="border: 1px solid #dddddd; padding: 8px; text-align: left; background: #f7f7f7;">指标</th><th style="border: 1px solid #dddddd; padding: 8px; text-align: left; background: #f7f7f7;">数字</th></tr>
+<tr><td style="border: 1px solid #dddddd; padding: 8px;">总数</td><td style="border: 1px solid #dddddd; padding: 8px;">1886</td></tr>
+<tr><td style="border: 1px solid #dddddd; padding: 8px;">在架</td><td style="border: 1px solid #dddddd; padding: 8px;">1806</td></tr>
+<tr><td style="border: 1px solid #dddddd; padding: 8px;">过去 24 小时新增</td><td style="border: 1px solid #dddddd; padding: 8px;">1221</td></tr>
+<tr><td style="border: 1px solid #dddddd; padding: 8px;">已过期</td><td style="border: 1px solid #dddddd; padding: 8px;">230</td></tr>
+<tr><td style="border: 1px solid #dddddd; padding: 8px;">带兑换码</td><td style="border: 1px solid #dddddd; padding: 8px;">31</td></tr>
+</table>
+<p style="margin: 0 0 16px;">分类里排前面的依次是 other 385、vps 247、headline 215、game 189、ai 163。按种类分，免费资源 913 条，资讯 382 条，优惠 292 条。最大的来源是 NodeSeek 的 RSS，一家就贡献了 575 条。</p>
+<p style="margin: 0 0 16px;">从雷达里捞到的六样东西，都是 11 月 16 日上午核对过还在架的：</p>
+<table style="width: 100%; border-collapse: collapse; margin: 0 0 16px; font-size: 15px;">
+<tr><th style="border: 1px solid #dddddd; padding: 8px; text-align: left; background: #f7f7f7;">东西</th><th style="border: 1px solid #dddddd; padding: 8px; text-align: left; background: #f7f7f7;">内容</th><th style="border: 1px solid #dddddd; padding: 8px; text-align: left; background: #f7f7f7;">入库日期</th></tr>
+<tr><td style="border: 1px solid #dddddd; padding: 8px;">6Luna 免费 Key</td><td style="border: 1px solid #dddddd; padding: 8px;">免费 Key</td><td style="border: 1px solid #dddddd; padding: 8px;">11-14</td></tr>
+<tr><td style="border: 1px solid #dddddd; padding: 8px;">华为云 200 代金券</td><td style="border: 1px solid #dddddd; padding: 8px;">200 元代金券</td><td style="border: 1px solid #dddddd; padding: 8px;">11-15</td></tr>
+<tr><td style="border: 1px solid #dddddd; padding: 8px;">AI 搜索神器兑换码</td><td style="border: 1px solid #dddddd; padding: 8px;">送 8000 积分</td><td style="border: 1px solid #dddddd; padding: 8px;">11-15</td></tr>
+<tr><td style="border: 1px solid #dddddd; padding: 8px;">numes.ai 多模型限时免费</td><td style="border: 1px solid #dddddd; padding: 8px;">多个模型限时免费</td><td style="border: 1px solid #dddddd; padding: 8px;">11-14</td></tr>
+<tr><td style="border: 1px solid #dddddd; padding: 8px;">B 站一个月大会员</td><td style="border: 1px solid #dddddd; padding: 8px;">联名卡用户记得领</td><td style="border: 1px solid #dddddd; padding: 8px;">11-15</td></tr>
+<tr><td style="border: 1px solid #dddddd; padding: 8px;">SIMCAT</td><td style="border: 1px solid #dddddd; padding: 8px;">免费 Wi-Fi Calling 与 eSIM 管理应用</td><td style="border: 1px solid #dddddd; padding: 8px;">11-15</td></tr>
+</table>
+<p style="margin: 0 0 16px;">免费资源有时效，上面这张表只保证截至 11 月 16 日上午在架，领之前先核对。</p>
+<h2 style="font-size: 20px; margin: 28px 0 12px; color: #111111;">六、还没做完的事</h2>
+<p style="margin: 0 0 16px;">还有三件事没做。第一，域名和前置代理：本来打算用 Cloudflare 做域名解析加前置代理，现在决定先这样，暂时不配。第二，AI 语义定级和 Telegram 推送还没开，现在跑的是规则初筛那一层。第三，fork 的同步：我的 fork 停在 4f89041 加补丁的状态，上游 main 又往前走了 6 个提交，下次升级前先把 fork 同步到上游最新，再到服务器上拉。</p>
+<h2 style="font-size: 20px; margin: 28px 0 12px; color: #111111;">七、结尾：收藏夹不会自己变长</h2>
+<p style="margin: 0 0 16px;">从看到项目到雷达跑起来，只用了一个上午。中间撞了一个端口问题和一个启动 bug，各花了几分钟。回头看，真正花时间的是决定：收藏，还是动手。</p>
+<p style="margin: 0 0 16px;">收藏夹不会自己变长。动手搭一个，哪怕只跑起来一天，雷达也会自己往里捡东西。截至今天早上，它已经捡了 1886 条。</p>
+<p style="font-size: 14px; color: #888888; margin: 24px 0 0;">来源：张路，《自己搭一个免费资源雷达》，https://github.com/zhanglunet/freebie-radar 。</p>
+</body>
+</html>

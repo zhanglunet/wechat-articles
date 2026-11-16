@@ -9,3 +9,12 @@ articles:
     version_date: "2026-11-15"
     first_published: "2026-10-18"
     status: draft_created_unpublished
+  - slug: 2026-11-16-freebie-radar
+    year: 2026
+    path: 2026/2026-11-16-freebie-radar
+    title: 自己搭一个免费资源雷达
+    author: 张路
+    source: https://github.com/zhanglunet/freebie-radar
+    version: "1.0"
+    version_date: "2026-11-16"
+    status: drafting
