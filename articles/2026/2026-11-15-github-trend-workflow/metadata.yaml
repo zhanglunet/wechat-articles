@@ -5,8 +5,8 @@ source: https://trend.zhanglu.net/workflow
 version: "2.0"
 version_date: "2026-11-15"
 first_published: "2026-10-18"
-status: draft_created_unpublished
-status_note: 公众号草稿箱里已有一篇未发布草稿，尚未发布，也未群发。此文件不记录草稿标识、素材标识或公众号标识。
+status: published
+status_note: 已发布。发布日期以公众号后台为准。此文件不记录草稿标识、素材标识或公众号标识。
 editor_source: markdown
 copyright: 版权归作者张路所有。本篇未授予开放许可。
 structure:
