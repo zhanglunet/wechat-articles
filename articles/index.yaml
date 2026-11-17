@@ -9,3 +9,12 @@ articles:
     version_date: "2026-11-15"
     first_published: "2026-10-18"
     status: draft_created_unpublished
+  - slug: 2026-11-18-excel-ai-analyst
+    year: 2026
+    path: 2026/2026-11-18-excel-ai-analyst
+    title: 大表哥：你的表格伴侣
+    author: 张路
+    source: https://github.com/zhanglunet/excel-ai-analyst
+    version: "1.0"
+    version_date: "2026-11-18"
+    status: drafting
