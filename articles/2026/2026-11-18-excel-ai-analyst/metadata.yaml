@@ -1,0 +1,35 @@
+slug: 2026-11-18-excel-ai-analyst
+title: 大表哥：你的表格伴侣
+author: 张路
+source: https://github.com/zhanglunet/excel-ai-analyst
+version: "1.0"
+version_date: "2026-11-18"
+status: drafting
+status_note: 正在写，还没进公众号草稿箱。
+editor_source: markdown
+copyright: 版权归作者张路所有。本篇未授予开放许可。
+structure:
+  chapters: 7
+  cases: 3
+  tables: 3
+  table_data_rows: [2, 3, 4]
+files:
+  markdown: article.md
+  html: article.html
+cover:
+  role: selected
+  style: magazine
+  path: assets/cover-magazine-16x9.jpg
+  width: 1280
+  height: 720
+optional_covers: []
+infographic:
+  svg: ""
+  png: ""
+  png_width: 0
+  png_height: 0
+  source: ""
+  credit: ""
+integrity:
+  markdown_sha256: 26b3cafbfee87a61db07833f9771e3090732ad716e0aae8930bbb11403513997
+  html_sha256: f9ad031bfdec9c73383d84e184ece73a300c89acebf16b7491f4a77fcd5ac733
