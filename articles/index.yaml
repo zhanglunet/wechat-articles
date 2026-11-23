@@ -9,3 +9,21 @@ articles:
     version_date: "2026-11-15"
     first_published: "2026-10-18"
     status: draft_created_unpublished
+  - slug: 2026-11-18-excel-ai-analyst
+    year: 2026
+    path: 2026/2026-11-18-excel-ai-analyst
+    title: 大表哥：你的表格伴侣
+    author: 张路
+    source: https://github.com/zhanglunet/excel-ai-analyst
+    version: "1.0"
+    version_date: "2026-11-18"
+    status: drafting
+  - slug: 2026-11-23-hackathon-tuning
+    year: 2026
+    path: 2026/2026-11-23-hackathon-tuning
+    title: 冷启动 51 秒：八轮调优手记
+    author: 张路
+    source: https://github.com/zhanglunet/hackathon-infra
+    version: "1.0"
+    version_date: "2026-11-23"
+    status: drafting

@@ -1,0 +1,35 @@
+slug: 2026-11-23-hackathon-tuning
+title: 冷启动 51 秒：八轮调优手记
+author: 张路
+source: https://github.com/zhanglunet/hackathon-infra
+version: "1.0"
+version_date: "2026-11-23"
+status: drafting
+status_note: 正在写，还没进公众号草稿箱。
+editor_source: markdown
+copyright: 版权归作者张路所有。本篇未授予开放许可。
+structure:
+  chapters: 7
+  cases: 3
+  tables: 3
+  table_data_rows: [4, 9, 5]
+files:
+  markdown: article.md
+  html: article.html
+cover:
+  role: selected
+  style: magazine
+  path: assets/cover-magazine-16x9.jpg
+  width: 1280
+  height: 720
+optional_covers: []
+infographic:
+  svg: ""
+  png: ""
+  png_width: 0
+  png_height: 0
+  source: ""
+  credit: ""
+integrity:
+  markdown_sha256: b7c3f745734c60cd9b84b3b716a9780027794992c97d79a5354160e62e4b9551
+  html_sha256: c473c0c23fa56241a4f26933f26433a55c3d1eac76acf92938c89f4b509899d3
