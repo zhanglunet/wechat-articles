@@ -1,0 +1,35 @@
+slug: 2026-11-24-drama-bot-demo
+title: 群里一句话，12 集短剧就开拍了
+author: 张路
+source: https://video.anp.pub/
+version: "1.0"
+version_date: "2026-11-24"
+status: drafting
+status_note: 正在写，还没进公众号草稿箱。
+editor_source: markdown
+copyright: 版权归作者张路所有。本篇未授予开放许可。
+structure:
+  chapters: 7
+  cases: 3
+  tables: 3
+  table_data_rows: [3, 9, 5]
+files:
+  markdown: article.md
+  html: article.html
+cover:
+  role: selected
+  style: magazine
+  path: assets/cover-magazine-16x9.jpg
+  width: 1280
+  height: 720
+optional_covers: []
+infographic:
+  svg: ""
+  png: ""
+  png_width: 0
+  png_height: 0
+  source: ""
+  credit: ""
+integrity:
+  markdown_sha256: 064f3b4684b2ed477ee9108ad4f41a6e0c0b10bd7c7fb432dc8497721490cfd5
+  html_sha256: d2925a806b50001fb8ee5cd5ae33464038a23e7d4b488bf9f7de800d862f7edf

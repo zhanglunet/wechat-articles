@@ -9,3 +9,12 @@ articles:
     version_date: "2026-11-15"
     first_published: "2026-10-18"
     status: draft_created_unpublished
+  - slug: 2026-11-24-drama-bot-demo
+    year: 2026
+    path: 2026/2026-11-24-drama-bot-demo
+    title: 群里一句话，12 集短剧就开拍了
+    author: 张路
+    source: https://video.anp.pub/
+    version: "1.0"
+    version_date: "2026-11-24"
+    status: drafting
