@@ -1,5 +1,5 @@
 slug: 2026-11-23-hackathon-tuning
-title: 冷启动 51 秒：八轮调优手记
+title: 没有 GPU 的八轮调优
 author: 张路
 source: https://github.com/zhanglunet/hackathon-infra
 version: "1.0"
@@ -31,5 +31,5 @@ infographic:
   source: ""
   credit: ""
 integrity:
-  markdown_sha256: f9b96c8e7a7105ff1089f3082551ec9825134e801ff3f03fe53f24c53ced6172
-  html_sha256: 41686c0e31c4c34579c360b592ad10ce7a03e0d631f95c76a89cce2c7c0ade97
+  markdown_sha256: 689c96cf939ed0b9d72d8837f79904faf3836a433f211291e8e59a3c568d7d8e
+  html_sha256: 5f825c7d931f5dee2ee6903c5c0b224823326f592067a6f0c8ac959f53f34022

@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>冷启动 51 秒：八轮调优手记</title>
+<title>没有 GPU 的八轮调优</title>
 </head>
 <body style="font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif; font-size: 17px; line-height: 1.8; color: #333333; max-width: 640px; margin: 0 auto; padding: 16px;">
-<h1 style="font-size: 24px; line-height: 1.4; margin: 8px 0 12px; color: #111111;">冷启动 51 秒：八轮调优手记</h1>
+<h1 style="font-size: 24px; line-height: 1.4; margin: 8px 0 12px; color: #111111;">没有 GPU 的八轮调优</h1>
 <p style="font-size: 14px; color: #888888; margin: 0 0 16px;">作者：张路 ｜ 2026-11-23 ｜ 来源：https://github.com/zhanglunet/hackathon-infra</p>
 <p style="margin: 0 0 16px;"><img src="assets/cover-magazine-16x9.jpg" alt="冷启动调优封面" style="width: 100%; display: block;"></p>
 <p style="font-size: 14px; color: #888888; margin: 0 0 16px;">图片：本文封面，由 AI 生成。</p>
@@ -19,6 +19,9 @@
 <p style="margin: 0 0 16px;">552B 的大模型在单卡上装不下，练手先拿 27B 的模型（Qwen3.8-27B-FP8，FP8 精度下权重约 28G），把方法论跑通，再等比赛机。</p>
 <h2 style="font-size: 20px; margin: 28px 0 12px; color: #111111;">二、第一枪：272K 装得下，冷启动 51 秒</h2>
 <p style="margin: 0 0 16px;">第一枪是在 H200 上打的 272K 探测。先问能不能装下：KV 缓存总容量 2,955,530 个 token，一个 272K 的请求只占 9.2%，装得下。然后看速度：冷启动 51.72 秒、53.39 秒，两次都差不多；热启动 2.36 秒，过了；每 token 耗时（TPOT）14.7 毫秒，也过了。结论很干净：只剩冷启动这一根刺。</p>
+<p style="margin: 0 0 16px;"><img src="assets/fig-05-kv.png" alt="KV 缓存容量" style="width: 100%; display: block;"></p>
+<p style="font-size: 14px; color: #888888; margin: 0 0 16px;">图 1：单次 272K 请求只占 KV 缓存总容量的 9.2%，装得下。</p>
+
 <p style="margin: 0 0 16px;">起初我们按 20 秒那档算，51.72 秒是它的 2.6 倍。后来去核了测试标准的原文：三档是按场景分的，272K 不是单独一个场景，而是"所有模型必须统一支持、严禁截断"的硬性要求；272K 的单请求，适用的是智能体场景那档 15 秒。目标一下子变难了：要从 51.72 秒提速 3.4 倍。</p>
 <p style="margin: 0 0 16px;">这一枪花了 1.89 美元，剩 27.39 美元。</p>
 <h2 style="font-size: 20px; margin: 28px 0 12px; color: #111111;">三、三轮调参：分片不是瓶颈，编译悄悄降级了</h2>
@@ -35,6 +38,9 @@
 <tr><td style="border: 1px solid #dddddd; padding: 8px;">GDN 线性注意力</td><td style="border: 1px solid #dddddd; padding: 8px;">约 1.4 秒</td><td style="border: 1px solid #dddddd; padding: 8px;">3%</td></tr>
 <tr><td style="border: 1px solid #dddddd; padding: 8px;">其余开销</td><td style="border: 1px solid #dddddd; padding: 8px;">约 4.2 秒</td><td style="border: 1px solid #dddddd; padding: 8px;">8%</td></tr>
 </table>
+<p style="margin: 0 0 16px;"><img src="assets/fig-02-profiler.png" alt="Profiler 时间拆解" style="width: 100%; display: block;"></p>
+<p style="font-size: 14px; color: #888888; margin: 0 0 16px;">图 2：271.5K 冷请求按 GPU 时间拆开，FA3 prefill 占 65%。</p>
+
 <p style="margin: 0 0 16px;">prefill 就是"先把提示词算一遍"，272K 的提示词，第一遍要算很久。GDN 是线性注意力层，之前是头号嫌疑——它的 prefill 用的是即时编译的内核，看着最可疑。但 profiler 说：GDN 只占 1.4 秒，3%。换 GDN 的另一套后端（triton）再测，冷启动 53.04 秒，一点没改善。嫌疑排除。</p>
 <p style="margin: 0 0 16px;"><strong>案例 1：GDN 不是凶手。</strong>这一轮还顺带纠正了一个算错的数：上轮说的"算力利用率约 15%"是错的，它只算了线性层，漏了注意力那一半以上的计算量。按完整账算，有效算力约 520–620 TFLOPS，峰值利用率约 35–45%。还是偏低，但不是 15%。GPU 占用约 98%，完全是计算 bound，不是等数据。</p>
 <p style="margin: 0 0 16px;">编译被降级的原因也定位了：模型在引擎里会自动开启 breakable cudagraph，开启后就把编译模式悄悄置回 NONE，只记一条不起眼的日志。下一轮可以先关掉它再试编译。</p>
@@ -61,8 +67,11 @@
 <tr><td style="border: 1px solid #dddddd; padding: 8px;">第 7 轮</td><td style="border: 1px solid #dddddd; padding: 8px;">查源码：DeepGEMM 适用性</td><td style="border: 1px solid #dddddd; padding: 8px;">不上 GPU</td><td style="border: 1px solid #dddddd; padding: 8px;">$0</td></tr>
 <tr><td style="border: 1px solid #dddddd; padding: 8px;">第 8 轮</td><td style="border: 1px solid #dddddd; padding: 8px;">查源码：FlashInfer 线性核为何落选</td><td style="border: 1px solid #dddddd; padding: 8px;">不上 GPU</td><td style="border: 1px solid #dddddd; padding: 8px;">$0</td></tr>
 </table>
+<p style="margin: 0 0 16px;"><img src="assets/fig-01-ttft.png" alt="八轮冷启动时间" style="width: 100%; display: block;"></p>
+<p style="font-size: 14px; color: #888888; margin: 0 0 16px;">图 3：八轮冷启动时间，目标 15 秒，最好成绩 41.09 秒。</p>
+
 <p style="margin: 0 0 16px;">调优线到此收口：后端穷尽、编译结案、矩阵乘法没有开关。最好成绩就是 FlashInfer 的 41.09 秒，离 15 秒还差约 2.8 倍。</p>
-<h2 style="font-size: 20px; margin: 28px 0 12px; color: #111111;">七、精度自测：FP8 没亏；账本：实付 0 美元</h2>
+<h2 style="font-size: 20px; margin: 28px 0 12px; color: #111111;">七、精度自测：FP8 暂未见亏；账本：实付 0 美元</h2>
 <p style="margin: 0 0 16px;">速度之外，精度也要自测。用 EvalScope 在代理题集上跑分（官方 190 题不公开，这是代理题自测，不能等同官方复测分）：</p>
 <table style="width: 100%; border-collapse: collapse; margin: 0 0 16px; font-size: 15px;">
 <tr><th style="border: 1px solid #dddddd; padding: 8px; text-align: left; background: #f7f7f7;">评测集</th><th style="border: 1px solid #dddddd; padding: 8px; text-align: left; background: #f7f7f7;">FP8</th><th style="border: 1px solid #dddddd; padding: 8px; text-align: left; background: #f7f7f7;">BF16</th></tr>
@@ -72,11 +81,22 @@
 <tr><td style="border: 1px solid #dddddd; padding: 8px;">BFCL v3 simple（50 题）</td><td style="border: 1px solid #dddddd; padding: 8px;">94.00%（47/50）</td><td style="border: 1px solid #dddddd; padding: 8px;">96.00%（48/50）</td></tr>
 <tr><td style="border: 1px solid #dddddd; padding: 8px;">合计 170 题</td><td style="border: 1px solid #dddddd; padding: 8px;">116</td><td style="border: 1px solid #dddddd; padding: 8px;">113</td></tr>
 </table>
+<p style="margin: 0 0 16px;"><img src="assets/fig-03-precision.png" alt="FP8 与 BF16 精度对比" style="width: 100%; display: block;"></p>
+<p style="font-size: 14px; color: #888888; margin: 0 0 16px;">图 4：四集精度对比，FP8 合计 116 题，BF16 合计 113 题。</p>
+
+<p style="margin: 0 0 16px;">不过要留一句：这四集是在 max_tokens 4096 下测的，AIME 截断率 70%、LCB 55–57.5%、GPQA 38–48%，不少长推理是被截断判的；『没亏』目前只是代理集上的初步结论，等 issue #6 的 32K 重跑后再定。</p>
+
 <p style="margin: 0 0 16px;">FP8 反而高了 1.77 个百分点，但配对检验（McNemar，p≈0.55）说差异不显著。诚实的结论是：代理集上测不到 FP8 的系统性精度损失。BF16 的平均延迟还比 FP8 高约 27%，省精度的同时也省了时间。BFCL 那 50 题是后来用官方打分工具 bfcl_eval 直连本地端点补跑的，因为走平台内置要等一张联网确认卡，卡晾了一个小时超时了，不如自己接线。</p>
 <p style="margin: 0 0 16px;"><strong>案例 3：账算错了。</strong>前三轮调优，子代理估的是"约 1.6 美元"，核账发现实花 6.78 美元，估少了 4 倍。部署等待、初始化失败重试、容器没及时收的时间都算钱。按这个烧法，剩下的额度约够 H200 跑 4.5 小时。从那以后，每轮预算都把部署和等待时间算进去。还有一封误报警：邮箱说"serve 占到 10 张卡"，查下来只有一个部署在跑，其余 6 个都是已停止状态，是新旧部署交接重叠加自动扩容短时间冲到了上限。从此每轮测完立刻停部署，同一时间只留一个部署在跑。</p>
+<p style="margin: 0 0 16px;"><img src="assets/fig-04-cost.png" alt="调优花费" style="width: 100%; display: block;"></p>
+<p style="font-size: 14px; color: #888888; margin: 0 0 16px;">图 5：调优各阶段花费，全期累计 $20.39，实付 $0。</p>
+
 <p style="margin: 0 0 16px;">另一处省钱的修复在部署上：Modal 的 serve 函数默认每容器一次只处理 1 个输入，50 道 GPQA 题被串行化了，吞吐只有约 80 token/秒。加一行并发配置后，4 路并行、吞吐 800–900 token/秒，GPQA 从 37 分钟压到 3 分 07 秒。</p>
 <p style="margin: 0 0 16px;">最后算总账：累计已用 20.39 美元，剩 9.61 美元，实付 0 美元——全由额度抵了。演练测试报告 v2 已更新，结论改成"FP8 没亏"。</p>
 <p style="margin: 0 0 16px;">调优线收口了，但比赛还没打。报名 11 月 22 日 24:00 截止，最终 104 人、50 支队，组织方压到约 26 支。下一件真正的大事，是等组织方分下比赛机——4 台机、每台 8 张 Blackwell 卡——第一时间在真机上复测。云上这 8 轮的意义，是把"不要试什么"先排除了：分片不是瓶颈，编译在这个模型上是空转，Triton 慢 4.8 倍，DeepGEMM 和 FlashInfer 线性核进不去，FP8 没亏。真机到了，就从 FlashInfer 的 41.09 秒接着往下打。</p>
-<p style="margin: 0 0 16px;">来源：张路，《冷启动 51 秒：八轮调优手记》，https://github.com/zhanglunet/hackathon-infra 。</p>
+<p style="margin: 0 0 16px;"><img src="assets/fig-06-schedule.png" alt="四轮赛制时间线" style="width: 100%; display: block;"></p>
+<p style="font-size: 14px; color: #888888; margin: 0 0 16px;">图 6：四轮赛制时间线，11 月 25 日机器到位。</p>
+
+<p style="margin: 0 0 16px;">来源：张路，《没有 GPU 的八轮调优》，https://github.com/zhanglunet/hackathon-infra 。</p>
 </body>
 </html>

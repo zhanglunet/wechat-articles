@@ -21,7 +21,7 @@ articles:
   - slug: 2026-11-23-hackathon-tuning
     year: 2026
     path: 2026/2026-11-23-hackathon-tuning
-    title: 冷启动 51 秒：八轮调优手记
+    title: 没有 GPU 的八轮调优
     author: 张路
     source: https://github.com/zhanglunet/hackathon-infra
     version: "1.0"
