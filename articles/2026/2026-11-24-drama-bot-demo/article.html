@@ -10,15 +10,16 @@
 <h1 style="font-size:24px;line-height:1.4;margin:0 0 8px;">群里一句话，12 集短剧就开拍了</h1>
 <p style="font-size:14px;color:#888888;margin:0 0 24px;">来源：https://video.anp.pub/</p>
 <p>11 月 20 日那场演示，我负责的部分很简单：在群里发一句话，让三台机器人把一部短剧拍出来。老周负责讲任务网那部分——分工是演示前一天早上在群里定下来的，他讲任务网，我演短剧。</p>
-<p>但这篇文章不讲演示本身，讲演示背后的那套逻辑：任务网到底是干什么的。答案就一句话：<strong>把一件大事拆成小事，派给对的人（或者对的机器人），每一步都留证据。</strong>短剧就是拿来说明这句话的例子。</p>
+<p>但这篇文章不讲演示本身，讲演示背后的那套逻辑：任务网到底是干什么的。答案就一句话：<strong>把一件大事拆成小事，派给对的人（或者对的机器人），每一步都留证据，花的每一分钱都有数。</strong>短剧就是拿来说明这句话的例子。</p>
 <h2 style="font-size:20px;line-height:1.5;margin:32px 0 12px;">一、先说结论：任务网是干什么的</h2>
-<p>打个比方。任务网像一个车间主任加一条流水线。你交给他一句话，他干五件事：拆、派、闸、验、记。</p>
+<p>打个比方。任务网像一个车间主任加一条流水线。你交给他一句话，他干六件事：拆、派、闸、算、验、记。</p>
 <p>拆：把「拍一部短剧」拆成能干的小活。</p>
 <p>派：把小活派给干这活的人，或者机器人。</p>
 <p>闸：在关键地方设检查站，过不了就停下来等人。</p>
+<p>算：预算先定好，花了多少、超了怎么办，都有规矩。</p>
 <p>验：干完的活有人验收，过就过，不过就返工。</p>
 <p>记：每一步都记下来，出问题能回头查。</p>
-<p>下面五章，一章讲一件事，每件事都拿短剧当例子。</p>
+<p>下面六章，一章讲一件事，每件事都拿短剧当例子。</p>
 <h2 style="font-size:20px;line-height:1.5;margin:32px 0 12px;">二、拆：一句话怎么变成 12 集 × 16 环节</h2>
 <p>拆单像切蛋糕。不是切一刀就完事，是先切成 12 块（集），每块再切成 16 小块（环节），每集 4 个分镜并行推进。切完之后，每集都是一张独立的工单——一集出问题，卡在那一集，不影响另外 11 集。</p>
 <p><strong>案例 1：《持械入秦》第 1 集。</strong>拿一集已经跑完的当例子：古风仙侠题材，《持械入秦》第 1 集「墨刃破函谷」。这是拆出来的最小单位长什么样：</p>
@@ -60,24 +61,37 @@
 <tr><td style="border:1px solid #dddddd;padding:8px 10px;">预算闸门</td><td style="border:1px solid #dddddd;padding:8px 10px;">合同总额 ≤2 万元自动过闸</td></tr>
 <tr><td style="border:1px solid #dddddd;padding:8px 10px;">这一单实际花销</td><td style="border:1px solid #dddddd;padding:8px 10px;">只占预算的 1.8%</td></tr>
 </table>
-<h2 style="font-size:20px;line-height:1.5;margin:32px 0 12px;">五、验：审片卡和交付卡是干什么的</h2>
+<h2 style="font-size:20px;line-height:1.5;margin:32px 0 12px;">五、算：预算是怎么管的</h2>
+<p>算像家里的账本。每一笔花销都记着，超了就停。短剧这边，预算分四步管：</p>
+<p>1. <strong>先定上限</strong>。开拍之前先定三样：合同总额上限、模型推理 Token 预算上限、预算归属哪个成本中心。上限定死了，后面才有得算。</p>
+<p>2. <strong>受理后冻结</strong>。订单一受理，平台的账就冻结了：执行过程只改自己的映射表，绝不碰平台的闸门和三态。意思是，活干到一半，钱的那本账是锁死的，谁也改不了。</p>
+<p>3. <strong>超了有三档保护</strong>。花超了怎么办？分三档，由轻到重：</p>
+<table style="width:100%;border-collapse:collapse;font-size:15px;line-height:1.6;margin:12px 0;">
+<tr><th style="border:1px solid #dddddd;background:#f7f7f7;padding:8px 10px;text-align:left;">保护动作</th><th style="border:1px solid #dddddd;background:#f7f7f7;padding:8px 10px;text-align:left;">机器干什么</th><th style="border:1px solid #dddddd;background:#f7f7f7;padding:8px 10px;text-align:left;">大白话</th></tr>
+<tr><td style="border:1px solid #dddddd;padding:8px 10px;">预警并封顶</td><td style="border:1px solid #dddddd;padding:8px 10px;">先提醒，再把花销封住</td><td style="border:1px solid #dddddd;padding:8px 10px;">还能干，但不能再多花了</td></tr>
+<tr><td style="border:1px solid #dddddd;padding:8px 10px;">挂起并告警</td><td style="border:1px solid #dddddd;padding:8px 10px;">停下来，等人来看</td><td style="border:1px solid #dddddd;padding:8px 10px;">先停下，等人拍板</td></tr>
+<tr><td style="border:1px solid #dddddd;padding:8px 10px;">拦截后续派单</td><td style="border:1px solid #dddddd;padding:8px 10px;">直接不派新活了</td><td style="border:1px solid #dddddd;padding:8px 10px;">钱不够了，新活不接了</td></tr>
+</table>
+<p>4. <strong>用量账按机器人算</strong>。每台机器人花了多少资源、多少 Token、多少时间、多少钱、一次通过率多少，都聚合成一张账。下次派活，先看这张账：谁干得好又便宜，活就多派给谁；谁又贵又慢，就少派。</p>
+<p>这一单只花了预算的 1.8%，三档保护都没用上。但没用上不等于没有——预算这东西，平时看不见，出问题的时候，全靠它兜底。</p>
+<h2 style="font-size:20px;line-height:1.5;margin:32px 0 12px;">六、验：审片卡和交付卡是干什么的</h2>
 <p>验像质检员。每一道菜出锅都要尝一口，不好吃就回锅。短剧这边，质检分两道：</p>
 <p>分镜审片卡：首集出片后发 4 张，每张是定妆照加配音试听。点通过，或者单独重抽某一个分镜——只返工那一个，不用整集重拍。</p>
 <p>成片交付卡：4 镜全部通过，才发成片交付卡，里面是 mp4 链接。飞书卡片不能内嵌播放视频，所以只给链接。点验收通过，或者驳回。</p>
 <p><strong>案例 3：C1 分镜审片卡。</strong>这是群里最常见的卡——首集一出片它就出现，审片的人点通过或者重抽，剧就往下走。重抽只动一个分镜，是这套验收最省钱的地方：错在哪就改哪，不用推倒重来。</p>
 <p>确认、审片、验收不按固定角色分。群里的人都可以点这些按钮——谁在现场谁就审，不用等某个特定的人。这个口径是拍板过的：角色灵活，白名单校验保留，不是群成员点按钮照样拒绝。</p>
-<h2 style="font-size:20px;line-height:1.5;margin:32px 0 12px;">六、记：每一步都有记录</h2>
+<h2 style="font-size:20px;line-height:1.5;margin:32px 0 12px;">七、记：每一步都有记录</h2>
 <p>记像快递单号。每一个包裹都有单号，丢了能查到卡在哪一站。短剧这边，同一句话的每一站都有记录：确认卡、审片卡、交付卡，订单、合同、预算、用量账。卡在哪一步，翻记录就知道；谁点的通过、谁点的重抽，也都记着。</p>
 <p>公开的生产车间页，就是把这些记录摊开给你看：实时运行态和回放都能看。点开它，看到的不是一张效果图，是一条正在跑的流水线，每一步走到哪了、谁领了哪道环节、花了多少钱，都在上面。</p>
 <p>记的好处，平时看不出来，出问题的时候才知道：不用靠人回忆「当时是谁让过的」，翻记录就行。</p>
-<h2 style="font-size:20px;line-height:1.5;margin:32px 0 12px;">七、演示之后还没做完的事</h2>
+<h2 style="font-size:20px;line-height:1.5;margin:32px 0 12px;">八、演示之后还没做完的事</h2>
 <p>演示完了不等于做完了。这篇写的时候，还有三件事没落袋：</p>
 <p>1. <strong>单集页有个已知的小 bug</strong>。成片能看，但单集页上有处显示问题，还在修。</p>
 <p>2. <strong>确认卡过期保护还在评审</strong>。现在的确认卡没有过期保护，旧卡一直能点；修法是给确认卡加过期时间，过期了就点不了，方案还在评审。</p>
 <p>3. <strong>按题材出图还没做完</strong>。短剧的题材只有三个，写死的：赛博法务（默认）、古风仙侠、都市商战。改题材只改文字，不改图。演示的时候，海报是按通用做法出的，题材感主要靠文案和配音撑着。等按题材出图做完，同一个题材从海报到成片才能一眼认出来。</p>
 <p>这三件都不影响演示那天跑通的东西，但都影响以后能不能放心交给别人用。演示是证明「能跑通」，这三件是证明「能放心用」。下一篇写到它们的时候，应该已经合进去了。</p>
 <hr style="border:none;border-top:1px solid #dddddd;margin:32px 0 16px;">
-<p>回到开头那句话。任务网的逻辑就是五件事：拆、派、闸、验、记。一句话进来，12 集出去，中间每一步都有人能叫停。</p>
+<p>回到开头那句话。任务网的逻辑就是六件事：拆、派、闸、算、验、记。一句话进来，12 集出去，中间每一步都有人能叫停，每一分钱都有数。</p>
 <p>群里一句话，12 集短剧就开拍了。这句话的后半句是：开拍之后，每一步都有人能叫停。</p>
 </div>
 </body>

@@ -9,10 +9,10 @@ status_note: 正在写，还没进公众号草稿箱。
 editor_source: markdown
 copyright: 版权归作者张路所有。本篇未授予开放许可。
 structure:
-  chapters: 7
+  chapters: 8
   cases: 3
-  tables: 3
-  table_data_rows: [9, 3, 5]
+  tables: 4
+  table_data_rows: [9, 3, 5, 3]
 files:
   markdown: article.md
   html: article.html
@@ -31,5 +31,5 @@ infographic:
   source: ""
   credit: ""
 integrity:
-  markdown_sha256: cf7453551c98b823d498472437fd83caa4e3d8eddc0f56c9ec847856cb28b129
-  html_sha256: 81c2275c0d9e0edcd3e6bf410c173b11297e7c19ab4d9f6d3ac550cbf1a0248e
+  markdown_sha256: 31457c613a6b4c5cc8b19912512faec45ecc61c318529bb407e5de64f86a1f57
+  html_sha256: da94098e59f48926c00e4f283756c14536698aedcd686089cfbc0bb8f3d01c78
