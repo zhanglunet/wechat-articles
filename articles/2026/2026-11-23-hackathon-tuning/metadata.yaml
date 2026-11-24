@@ -1,0 +1,36 @@
+slug: 2026-11-23-hackathon-tuning
+title: 没有 GPU 的八轮调优
+author: 张路
+source: https://github.com/zhanglunet/hackathon-infra
+version: "1.0"
+version_date: "2026-11-23"
+first_published: "2026-11-24"
+status: published
+status_note: 已发布（2026-11-24）。
+editor_source: markdown
+copyright: 版权归作者张路所有。本篇未授予开放许可。
+structure:
+  chapters: 7
+  cases: 3
+  tables: 3
+  table_data_rows: [4, 9, 5]
+files:
+  markdown: article.md
+  html: article.html
+cover:
+  role: selected
+  style: magazine
+  path: assets/cover-magazine-16x9.jpg
+  width: 1280
+  height: 720
+optional_covers: []
+infographic:
+  svg: ""
+  png: ""
+  png_width: 0
+  png_height: 0
+  source: ""
+  credit: ""
+integrity:
+  markdown_sha256: 689c96cf939ed0b9d72d8837f79904faf3836a433f211291e8e59a3c568d7d8e
+  html_sha256: 5f825c7d931f5dee2ee6903c5c0b224823326f592067a6f0c8ac959f53f34022
