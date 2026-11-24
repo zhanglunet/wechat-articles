@@ -12,7 +12,7 @@ structure:
   chapters: 7
   cases: 3
   tables: 3
-  table_data_rows: [3, 9, 5]
+  table_data_rows: [9, 3, 5]
 files:
   markdown: article.md
   html: article.html
@@ -31,5 +31,5 @@ infographic:
   source: ""
   credit: ""
 integrity:
-  markdown_sha256: 064f3b4684b2ed477ee9108ad4f41a6e0c0b10bd7c7fb432dc8497721490cfd5
-  html_sha256: d2925a806b50001fb8ee5cd5ae33464038a23e7d4b488bf9f7de800d862f7edf
+  markdown_sha256: cf7453551c98b823d498472437fd83caa4e3d8eddc0f56c9ec847856cb28b129
+  html_sha256: 81c2275c0d9e0edcd3e6bf410c173b11297e7c19ab4d9f6d3ac550cbf1a0248e
