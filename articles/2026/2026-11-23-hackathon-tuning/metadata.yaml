@@ -4,8 +4,9 @@ author: 张路
 source: https://github.com/zhanglunet/hackathon-infra
 version: "1.0"
 version_date: "2026-11-23"
-status: drafting
-status_note: 正在写，还没进公众号草稿箱。
+first_published: "2026-11-24"
+status: published
+status_note: 已发布（2026-11-24）。
 editor_source: markdown
 copyright: 版权归作者张路所有。本篇未授予开放许可。
 structure:
