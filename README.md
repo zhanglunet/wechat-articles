@@ -16,7 +16,7 @@
 | 来源 | https://trend.zhanglu.net/workflow |
 | 版本 | v2.0，定稿日 2026-11-15 |
 | 首发日期 | 2026-10-18 |
-| 状态 | 草稿已创建，未发布，未群发 |
+| 状态 | 已发布 |
 | 正文 | [article.md](articles/2026/2026-11-15-github-trend-workflow/article.md) |
 | 微信兼容 HTML | [article.html](articles/2026/2026-11-15-github-trend-workflow/article.html) |
 | 选用封面 | [cover-magazine-16x9.jpg](articles/2026/2026-11-15-github-trend-workflow/assets/cover-magazine-16x9.jpg)（杂志风，1280×720） |
