@@ -14,6 +14,10 @@ WeChat ID of its own; both identifiers come from the command line each run.
 
 Prints only the preview API result (msg_id on success, errcode on failure).
 Never prints credentials or the access token.
+
+Note: the mass preview API requires an account with mass-send permission.
+Personal or uncertified accounts get 48001 api unauthorized; preview those
+drafts from the official-account backend instead (draft box -> preview).
 """
 import argparse
 import json
