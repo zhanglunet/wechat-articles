@@ -9,3 +9,12 @@ articles:
     version_date: "2026-11-15"
     first_published: "2026-10-18"
     status: draft_created_unpublished
+  - slug: 2026-11-25-project-kb
+    year: 2026
+    path: 2026/2026-11-25-project-kb
+    title: 别再往知识库里倒文档了
+    author: 张路
+    source: https://req-code-kb.pages.dev/
+    version: "1.0"
+    version_date: "2026-11-25"
+    status: drafting
