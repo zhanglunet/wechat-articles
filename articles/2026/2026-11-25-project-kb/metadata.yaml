@@ -1,0 +1,35 @@
+slug: 2026-11-25-project-kb
+title: 别再往知识库里倒文档了
+author: 张路
+source: https://req-code-kb.pages.dev/
+version: "1.0"
+version_date: "2026-11-25"
+status: drafting
+status_note: 浓缩单篇初稿，待作者选草稿标题与封面、确认正文图后建草稿。
+editor_source: markdown
+copyright: 版权归作者张路所有。本篇未授予开放许可。
+structure:
+  chapters: 7
+  cases: 2
+  tables: 2
+  table_data_rows: [7, 2]
+files:
+  markdown: article.md
+  html: article.html
+cover:
+  role: selected
+  style: magazine
+  path: assets/cover-magazine-16x9.jpg
+  width: 1280
+  height: 720
+optional_covers: []
+infographic:
+  svg: ""
+  png: ""
+  png_width: 0
+  png_height: 0
+  source: ""
+  credit: ""
+integrity:
+  markdown_sha256: 9193e25d9ef218645c360d9d7e4394619cda6c481f9834065e3d71c66bccfce0
+  html_sha256: e930dcd2a31b766519b5f042790b5cca4d0506bbcfa61c51e3bad98459b2000e
